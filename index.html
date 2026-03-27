@@ -175,15 +175,142 @@ section {
   font-weight: 600;
 }
 
+/* ── Hero Logo — Premium 3D Effect ── */
+.hero-title-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
 .hero-title {
   font-family: var(--font-en);
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(3.5rem, 9vw, 7.5rem);
   font-weight: 900;
   letter-spacing: -2px;
-  color: var(--text-bright);
-  line-height: 1.1;
-  margin-bottom: 24px;
-  text-shadow: 0 0 80px var(--orange-glow);
+  line-height: 1.05;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 2;
+  /* 크롬/골드 메탈릭 그라데이션 */
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f0e6d3 15%,
+    #ffffff 30%,
+    #d4a853 50%,
+    #f5d99a 65%,
+    #ffffff 80%,
+    #c9a44c 100%
+  );
+  background-size: 100% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* 3D 드롭섀도우 (텍스트 뒤에 깊은 그림자) */
+  filter:
+    drop-shadow(0 2px 0 rgba(180,140,60,0.5))
+    drop-shadow(0 4px 0 rgba(120,90,30,0.4))
+    drop-shadow(0 8px 16px rgba(0,0,0,0.8))
+    drop-shadow(0 0 80px rgba(255,107,43,0.5))
+    drop-shadow(0 0 160px rgba(255,107,43,0.2));
+  animation: logoReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards, logoGradientShift 6s ease-in-out 2s infinite;
+  opacity: 0;
+}
+
+/* 그라데이션 시프트 (살짝 움직이는 메탈릭 빛) */
+@keyframes logoGradientShift {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 0% 100%; }
+}
+
+@keyframes logoReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.85) rotateX(15deg);
+    filter:
+      drop-shadow(0 2px 0 rgba(180,140,60,0))
+      drop-shadow(0 4px 0 rgba(120,90,30,0))
+      drop-shadow(0 8px 16px rgba(0,0,0,0))
+      drop-shadow(0 0 0px rgba(255,107,43,0))
+      drop-shadow(0 0 0px rgba(255,107,43,0));
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.04) rotateX(-2deg);
+  }
+  75% {
+    transform: translateY(3px) scale(1) rotateX(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+    filter:
+      drop-shadow(0 2px 0 rgba(180,140,60,0.5))
+      drop-shadow(0 4px 0 rgba(120,90,30,0.4))
+      drop-shadow(0 8px 16px rgba(0,0,0,0.8))
+      drop-shadow(0 0 80px rgba(255,107,43,0.5))
+      drop-shadow(0 0 160px rgba(255,107,43,0.2));
+  }
+}
+
+/* 빛이 지나가는 스캔라인 효과 — 텍스트 위에만 */
+.hero-title::before {
+  content: 'BRAND\ASHOW UP';
+  white-space: pre;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent 0%, transparent 30%, rgba(255,255,255,0.5) 50%, transparent 70%, transparent 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  z-index: 3;
+  animation: logoScanline 4s ease-in-out 2.5s infinite;
+  pointer-events: none;
+}
+@keyframes logoScanline {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* 쉬머 오버레이 (오렌지/블루 반짝) */
+.hero-title::after {
+  content: 'BRAND\ASHOW UP';
+  white-space: pre;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(255,107,43,0.25), transparent 40%, rgba(0,212,255,0.2) 70%, transparent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: logoShimmer 5s ease-in-out infinite;
+  z-index: 4;
+}
+@keyframes logoShimmer {
+  0%, 100% { opacity: 0; }
+  40% { opacity: 1; }
+  60% { opacity: 1; }
+}
+
+/* 로고 뒤 글로우 오브 (배경 빛) */
+.hero-title-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(255,107,43,0.15) 0%, transparent 60%);
+  z-index: 1;
+  animation: glowPulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
 }
 
 .hero-subtitle {
@@ -835,7 +962,10 @@ section {
     <div class="hero-badge reveal">
       <span>●</span> Project by AVING NEWS
     </div>
-    <h1 class="hero-title reveal delay-1">BRAND<br>SHOW UP</h1>
+    <div class="hero-title-wrapper">
+      <div class="hero-title-glow"></div>
+      <h1 class="hero-title reveal delay-1">BRAND<br>SHOW UP</h1>
+    </div>
     <p class="hero-subtitle reveal delay-2">AI 시대, 공신력 있는 기사로 검색을 지배하다</p>
     <p class="hero-highlight reveal delay-3">
       단 2회 세션 취재 · 3개월 집중 보도 · 30건+ 기사·영상·숏폼
