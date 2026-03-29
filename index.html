@@ -216,7 +216,6 @@ section {
     drop-shadow(0 0 80px rgba(255,107,43,0.5))
     drop-shadow(0 0 160px rgba(255,107,43,0.2));
   animation: logoReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards, logoGradientShift 6s ease-in-out 2s infinite;
-  opacity: 0;
 }
 
 /* 그라데이션 시프트 (살짝 움직이는 메탈릭 빛) */
@@ -953,6 +952,27 @@ section {
   .flow-arrow { transform: rotate(90deg); }
   .tab-nav { justify-content: center; }
   .partner-badges { gap: 12px; }
+
+  /* ── 모바일 GPU 성능 최적화 ── */
+  .hero-orb { filter: blur(60px); animation: none; }
+  .hero-title {
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.8)) drop-shadow(0 0 40px rgba(255,107,43,0.4));
+    animation: logoReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .hero-title::before { animation: none; opacity: 0; }
+  .hero-title::after { animation: none; opacity: 0; }
+  .hero-title-glow { animation: none; }
+  .cta-orb { filter: blur(40px); }
+  .hero-badge, .problem-card, .tab-btn { backdrop-filter: none; }
+}
+
+/* ── 동작 줄이기 설정 지원 ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
 }
 </style>
 </head>
@@ -1035,6 +1055,7 @@ section {
     <h2 class="section-title reveal"><em>에이빙뉴스</em>, AI 에이전트 시대<br>귀사의 외부 홍보본부 역할</h2>
 
     <div class="solution-quote reveal">
+      <img src="images/ces-judge-badge.png" alt="CES Innovation Awards 2026 Judge" style="height:90px; margin-bottom:16px; display:block; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));">
       별도 홍보 인력도, 다수의 외주 채널도 필요 없습니다.<br>
       23년 취재 경력과 CES 혁신상 심사위원 경험을 가진 기자들<br>
       (편집팀 / 취재본부팀 / 출입기자 / 방송PD 팀플레이)이<br>
@@ -1375,7 +1396,14 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15 });
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal').forEach(el => {
+  const rect = el.getBoundingClientRect();
+  if (rect.top < window.innerHeight) {
+    el.classList.add('visible');
+  } else {
+    observer.observe(el);
+  }
+});
 
 // ── Count-Up Animation ──
 const countObserver = new IntersectionObserver((entries) => {
