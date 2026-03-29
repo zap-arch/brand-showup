@@ -193,28 +193,26 @@ section {
   margin-bottom: 0;
   position: relative;
   z-index: 2;
-  /* 크롬/골드 메탈릭 그라데이션 */
+  /* 실버 메탈릭 그라데이션 */
   background: linear-gradient(
     180deg,
     #ffffff 0%,
-    #f0e6d3 15%,
-    #ffffff 30%,
-    #d4a853 50%,
-    #f5d99a 65%,
-    #ffffff 80%,
-    #c9a44c 100%
+    #e0e0e0 20%,
+    #ffffff 40%,
+    #b0b0b0 60%,
+    #d8d8d8 75%,
+    #ffffff 90%,
+    #a0a0a0 100%
   );
   background-size: 100% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  /* 3D 드롭섀도우 (텍스트 뒤에 깊은 그림자) */
+  /* 3D 드롭섀도우 (은색 입체감) */
   filter:
-    drop-shadow(0 2px 0 rgba(180,140,60,0.5))
-    drop-shadow(0 4px 0 rgba(120,90,30,0.4))
-    drop-shadow(0 8px 16px rgba(0,0,0,0.8))
-    drop-shadow(0 0 80px rgba(255,107,43,0.5))
-    drop-shadow(0 0 160px rgba(255,107,43,0.2));
+    drop-shadow(0 2px 0 rgba(160,160,160,0.5))
+    drop-shadow(0 4px 0 rgba(100,100,100,0.4))
+    drop-shadow(0 8px 16px rgba(0,0,0,0.8));
   animation: logoReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards, logoGradientShift 6s ease-in-out 2s infinite;
 }
 
@@ -229,11 +227,9 @@ section {
     opacity: 0;
     transform: translateY(60px) scale(0.85) rotateX(15deg);
     filter:
-      drop-shadow(0 2px 0 rgba(180,140,60,0))
-      drop-shadow(0 4px 0 rgba(120,90,30,0))
-      drop-shadow(0 8px 16px rgba(0,0,0,0))
-      drop-shadow(0 0 0px rgba(255,107,43,0))
-      drop-shadow(0 0 0px rgba(255,107,43,0));
+      drop-shadow(0 2px 0 rgba(160,160,160,0))
+      drop-shadow(0 4px 0 rgba(100,100,100,0))
+      drop-shadow(0 8px 16px rgba(0,0,0,0));
   }
   50% {
     opacity: 1;
@@ -246,11 +242,9 @@ section {
     opacity: 1;
     transform: translateY(0) scale(1) rotateX(0deg);
     filter:
-      drop-shadow(0 2px 0 rgba(180,140,60,0.5))
-      drop-shadow(0 4px 0 rgba(120,90,30,0.4))
-      drop-shadow(0 8px 16px rgba(0,0,0,0.8))
-      drop-shadow(0 0 80px rgba(255,107,43,0.5))
-      drop-shadow(0 0 160px rgba(255,107,43,0.2));
+      drop-shadow(0 2px 0 rgba(160,160,160,0.5))
+      drop-shadow(0 4px 0 rgba(100,100,100,0.4))
+      drop-shadow(0 8px 16px rgba(0,0,0,0.8));
   }
 }
 
@@ -282,7 +276,7 @@ section {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: linear-gradient(135deg, rgba(255,107,43,0.25), transparent 40%, rgba(0,212,255,0.2) 70%, transparent);
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent 40%, rgba(200,200,200,0.15) 70%, transparent);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -302,7 +296,7 @@ section {
   transform: translate(-50%, -50%);
   width: 120%;
   height: 200%;
-  background: radial-gradient(ellipse at center, rgba(255,107,43,0.15) 0%, transparent 60%);
+  background: radial-gradient(ellipse at center, rgba(200,200,200,0.08) 0%, transparent 60%);
   z-index: 1;
   animation: glowPulse 3s ease-in-out infinite;
   pointer-events: none;
@@ -956,7 +950,7 @@ section {
   /* ── 모바일 GPU 성능 최적화 ── */
   .hero-orb { filter: blur(60px); animation: none; }
   .hero-title {
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.8)) drop-shadow(0 0 40px rgba(255,107,43,0.4));
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.8)) drop-shadow(0 0 40px rgba(200,200,200,0.2));
     animation: logoReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   .hero-title::before { animation: none; opacity: 0; }
